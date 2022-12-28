@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Vapeur.Business
+namespace Vapeur.Business.DTO
 {
     public class Copy
     {
@@ -14,7 +14,7 @@ namespace Vapeur.Business
         private Player owner;
 
         public int ID { get { return id; } set { id = value; } }
-        public VideoGame Game { get { return game;} set { game = value; } }
+        public VideoGame Game { get { return game; } set { game = value; } }
         public Player Owner { get { return owner; } set { owner = value; } }
     }
 }

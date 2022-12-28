@@ -4,16 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Vapeur.Business
+namespace Vapeur.Business.DTO
 {
     public abstract class User
     {
         private int id;
-        private string username,password;
+        private string username, password;
 
-        public int ID { 
-            get {
-            return id;
+        public int ID
+        {
+            get
+            {
+                return id;
             }
             set
             {
@@ -21,7 +23,8 @@ namespace Vapeur.Business
             }
         }
 
-        public string Username {
+        public string Username
+        {
             get
             {
                 return username;
@@ -32,7 +35,8 @@ namespace Vapeur.Business
             }
         }
 
-        public string Password {
+        public string Password
+        {
             get
             {
                 return password;
@@ -43,11 +47,9 @@ namespace Vapeur.Business
             }
         }
 
-        public User(int id, string username, string password)
+        public User()
         {
-            this.id = id;
-            this.username = username;
-            this.password = password;
+
         }
 
         abstract public User Login(User user);

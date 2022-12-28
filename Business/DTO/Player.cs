@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Vapeur.Business
+namespace Vapeur.Business.DTO
 {
     public class Player : User
     {
@@ -12,17 +12,20 @@ namespace Vapeur.Business
         private string pseudo;
         private DateTime registrationDate, dateOfBirth;
 
-        public int Credit {
+        public int Credit
+        {
             get { return credit; }
             set { credit = value; }
         }
 
-        public string Pseudo {
+        public string Pseudo
+        {
             get { return pseudo; }
             set { pseudo = value; }
         }
 
-        public DateTime Registration {
+        public DateTime Registration
+        {
             get { return registrationDate; }
             set
             {
@@ -36,7 +39,7 @@ namespace Vapeur.Business
             set { dateOfBirth = value; }
         }
 
-        public Player(int id, string username, string password) : base(id, username, password)
+        public Player() : base()
         {
         }
 

@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Business\DAO\" />
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.0.1" />
   </ItemGroup>
 
 </Project>

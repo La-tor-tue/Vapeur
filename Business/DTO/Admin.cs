@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Vapeur.Business
+namespace Vapeur.Business.DTO
 {
     public class Admin : User
     {
-        public Admin(int id, string username, string password) : base(id, username, password)
+        public Admin() : base()
         {
 
         }
