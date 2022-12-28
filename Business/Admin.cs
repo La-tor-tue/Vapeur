@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Vapeur.Business
 {
-    class Admin : User
+    public class Admin : User
     {
         public Admin(int id, string username, string password) : base(id, username, password)
         {

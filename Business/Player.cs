@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Vapeur.Business
 {
-    class Player : User
+    public class Player : User
     {
         private int credit;
         private string pseudo;
@@ -24,6 +24,10 @@ namespace Vapeur.Business
 
         public DateTime Registration {
             get { return registrationDate; }
+            set
+            {
+                registrationDate = value;
+            }
         }
 
         public DateTime BirthDate

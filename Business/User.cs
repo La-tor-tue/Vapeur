@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Vapeur.Business
 {
-    abstract class User
+    public abstract class User
     {
         private int id;
         private string username,password;
@@ -14,6 +14,10 @@ namespace Vapeur.Business
         public int ID { 
             get {
             return id;
+            }
+            set
+            {
+                id = value;
             }
         }
 
