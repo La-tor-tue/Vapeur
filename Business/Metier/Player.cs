@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Vapeur.Business.DTO
+namespace Vapeur.Business.Metier
 {
     public class Player : User
     {
@@ -46,6 +46,20 @@ namespace Vapeur.Business.DTO
         public override User Login(User user)
         {
             throw new NotImplementedException();
+        }
+
+        public bool LoanAllowed()
+        {
+            if (credit>0)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public void AddBirthdayBonus()
+        {
+
         }
     }
 }

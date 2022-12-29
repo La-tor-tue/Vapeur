@@ -5,7 +5,7 @@ using System.Linq;
 using System.Runtime.Intrinsics.Arm;
 using System.Text;
 using System.Threading.Tasks;
-using Vapeur.Business.DTO;
+using Vapeur.Business.Metier;
 
 namespace Vapeur.Business.DAO
 {

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Vapeur.Business.DTO;
+using Vapeur.Business.Metier;
 
 namespace Vapeur.Business.DAO
 {
@@ -85,7 +85,7 @@ namespace Vapeur.Business.DAO
                             copy.Game.ID = reader.GetInt32(1);
                             copy.Owner.ID = reader.GetInt32(2);
 
-
+                            copies.Add(copy);
                         }
                     }
                 }
@@ -117,6 +117,7 @@ namespace Vapeur.Business.DAO
                                 ID = reader.GetInt32(0),
                                 Game = new VideoGame(),
                                 Owner = new Player()
+
                             };
 
                             copy.Game.ID = reader.GetInt32(1);

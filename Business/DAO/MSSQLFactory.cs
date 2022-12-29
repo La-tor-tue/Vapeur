@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Vapeur.Business.DTO;
+using Vapeur.Business.Metier;
 using static Vapeur.Business.DAO.DAOFactory;
 
 namespace Vapeur.Business.DAO

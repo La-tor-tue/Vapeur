@@ -16,7 +16,9 @@
         </StackPanel>
         <Label Content="Vos jeux" HorizontalAlignment="Center" Margin="0,23,0,0" VerticalAlignment="Top"/>
 
-        <DataGrid Grid.Column="1"/>
+        <DataGrid Grid.Column="1" ItemsSource="{Binding MyCopies}">
+            
+        </DataGrid>
 
     </Grid>
 </UserControl>

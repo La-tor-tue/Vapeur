@@ -5,26 +5,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Vapeur.Business.DAO;
-using Vapeur.Business.DTO;
+using Vapeur.Business.Metier;
 
-namespace Vapeur.Business.POCO
+namespace Vapeur.Business.Controller
 {
-    public class GamePOCO
+    public class CatalogueController
     {
-        private GameDAO dbAcces;
 
+        private DAO<VideoGame> gameDAO;
         private ObservableCollection<VideoGame> games;
+        public CatalogueController(DAOFactory dAOFactory)
+        {
+            this.gameDAO = dAOFactory.GetGameDAO();
+            this.games = new ObservableCollection<VideoGame> (gameDAO.GetAll());
+        }
 
         public ObservableCollection<VideoGame> Games { get { return games; } set { games = value; } }
 
-        public GamePOCO(GameDAO dbAcces)
-        {
-            this.dbAcces = dbAcces;
-        }
 
-        public void AddGame(VideoGame game)
-        {
-            games.Add(game);
-        }
+
     }
 }

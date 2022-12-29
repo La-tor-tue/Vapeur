@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Vapeur.Business.DTO
+namespace Vapeur.Business.Metier
 {
     public class Booking
-    { 
+    {
 
 
         private DateTime bookingDate;
@@ -21,5 +21,6 @@ namespace Vapeur.Business.DTO
         public VideoGame Game { get { return game; } set { game = value; } }
 
         public Player Booker { get { return booker; } set { booker = value; } }
+
     }
 }
