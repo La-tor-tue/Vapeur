@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Vapeur.Business.DAO;
 using Vapeur.Business.DTO;
+using Vapeur.View.CustomUC;
 
 namespace Vapeur
 {
@@ -27,6 +28,12 @@ namespace Vapeur
         public MainWindow()
         {
             InitializeComponent();
+
+            UCGame uCGame = new UCGame();
+
+            grContent.Children.Clear();
+            grContent.Children.Add(uCGame);
+
             DAOFactory adf = DAOFactory.GetFactory(DAOFactoryType.MS_SQL_FACTORY);
             DAO<VideoGame> gameDAO = adf.GetGameDAO();
             DAO<Player> playerDAO = adf.GetPlayerDAO();
@@ -93,10 +100,44 @@ namespace Vapeur
                 
             };
             */
+            /*
             Loan loan = loanDAO.Read(2, 4);
             loanDAO.Delete(loan);
+            */
+
 
         }
 
+        private void btnGame_Click(object sender, RoutedEventArgs e)
+        {
+            UCGame uCGame = new UCGame();
+
+            grContent.Children.Clear();
+            grContent.Children.Add(uCGame);
+        }
+
+        private void btnBooking_Click(object sender, RoutedEventArgs e)
+        {
+            UCBooking uCBooking= new UCBooking();
+
+            grContent.Children.Clear();
+            grContent.Children.Add(uCBooking);
+        }
+
+        private void btnLoan_Click(object sender, RoutedEventArgs e)
+        {
+            UCLoan uCLoan =new UCLoan();
+
+            grContent.Children.Clear();
+            grContent.Children.Add(uCLoan);
+        }
+
+        private void btnCopy_Click(object sender, RoutedEventArgs e)
+        {
+            UCMyGame uCMyGame=new UCMyGame();
+
+            grContent.Children.Clear();
+            grContent.Children.Add(uCMyGame);
+        }
     }
 }
