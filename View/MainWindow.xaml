@@ -5,5 +5,31 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Vapeur"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Vapeur" Height="500" Width="850"
+        ResizeMode="NoResize"
+        >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="79.007"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Width="522" Height="20">
+            <Button x:Name="btnGame" Content="CATALOGUE" Margin="20,0,0,0" Click="btnGame_Click"/>
+            <Button x:Name="btnBooking" Content="MES RESERVATIONS" Margin="20,0,0,0" Click="btnBooking_Click"/>
+            <Button x:Name="btnLoan" Content="MES LOCATIONS" Margin="20,0,0,0" Click="btnLoan_Click"/>
+            <Button x:Name="btnCopy" Content="MES JEUX" Margin="20,0,0,0" Click="btnCopy_Click"/>
+            <Button x:Name="btnProfile" Content="MON PROFILE" Margin="20,0,0,0" Click="btnProfile_Click"/>
+
+        </StackPanel>
+        <Grid x:Name="grContent" Grid.Row="1">
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="White"/>
+                    <GradientStop Color="#FF4E626B" Offset="1"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+        </Grid>
+    </Grid>
 </Window>
+    
+    

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.DirectoryServices.ActiveDirectory;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,91 +13,89 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Vapeur.Business.Controller;
 using Vapeur.Business.DAO;
-using Vapeur.Business.DTO;
+using Vapeur.Business.Metier;
+using Vapeur.View.CustomUC;
 
 namespace Vapeur
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+    /// 
     public partial class MainWindow : Window
     {
-        List<VideoGame> games = new List<VideoGame>();
+
+
+        private MainController mainController;
+        private readonly DAOFactory adf = DAOFactory.GetFactory(DAOFactoryType.MS_SQL_FACTORY);
 
         public MainWindow()
         {
             InitializeComponent();
-            DAOFactory adf = DAOFactory.GetFactory(DAOFactoryType.MS_SQL_FACTORY);
-            DAO<VideoGame> gameDAO = adf.GetGameDAO();
-            DAO<Player> playerDAO = adf.GetPlayerDAO();
-            DAO<Booking> bookingDAO = adf.GetBookingDAO();
-            DAO<Copy> copyDAO = adf.GetCopyDAO();
-            DAO<Loan> loanDAO = adf.GetLoanDAO();
 
-            /*
-            Player player = new Player
-            {
+
+            UCGame uCGame = new UCGame();
+
+            mainController = new MainController(adf,new Player {
+                ID=4,
                 Username= "username",
-                Password= "password",
+                Password= "username",
+                Credit=10,
                 Pseudo="Pseudo",
-                Registration=DateTime.Now,
-                BirthDate=DateTime.Now,
-            };
+                Registration=new DateTime(2022,12,28),
+                BirthDate=new DateTime(2022, 12, 28)
+            });;
 
-            playerDAO.Create(player);
-            */
+            uCGame.DataContext= mainController;
 
-            /*
-            Player player = playerDAO.Read(4);
-            VideoGame game = gameDAO.Read(1);
-
-            Booking booking = new Booking {
-                Booker = player,
-                Game = game,
-                BookingDate = DateTime.Now,
-            };
-            
-            bookingDAO.Create(booking);
-            */
-            /*
-           Booking  booking = bookingDAO.Read(1, 4);
-            bookingDAO.Delete(booking);
-            */
-
-            /*
-            Player player = playerDAO.Read(4);
-            VideoGame game = gameDAO.Read(1);
-
-            Copy copy = new Copy {
-                Owner= player,
-                Game=game,
-            };
-
-            copyDAO.Create(copy);
-            */
-
-            /*
-            Copy copy = copyDAO.Read(1);
-            copyDAO.Delete(copy);
-            */
-            /*
-            Player player = playerDAO.Read(4);
-            Copy copy = copyDAO.Read(2);
-
-            Loan loan = new Loan {
-                Borrower = player,
-                Copy = copy,
-                StartDate = DateTime.Now,
-                EndDate = DateTime.Now,
-                Ongoing = false,
-                
-            };
-            */
-            Loan loan = loanDAO.Read(2, 4);
-            loanDAO.Delete(loan);
+            grContent.Children.Clear();
+            grContent.Children.Add(uCGame);
 
         }
 
+        private void btnGame_Click(object sender, RoutedEventArgs e)
+        {
+            UCGame uCGame = new UCGame();
+
+            uCGame.DataContext = mainController;
+
+            grContent.Children.Clear();
+            grContent.Children.Add(uCGame);
+        }
+
+        private void btnBooking_Click(object sender, RoutedEventArgs e)
+        {
+            UCBooking uCBooking= new UCBooking();
+
+            uCBooking.DataContext = mainController;
+            grContent.Children.Clear();
+            grContent.Children.Add(uCBooking);
+        }
+
+        private void btnLoan_Click(object sender, RoutedEventArgs e)
+        {
+            UCLoan uCLoan =new UCLoan();
+
+            uCLoan.DataContext = mainController;
+            grContent.Children.Clear();
+            grContent.Children.Add(uCLoan);
+        }
+
+        private void btnCopy_Click(object sender, RoutedEventArgs e)
+        {
+            UCMyGame uCMyGame=new UCMyGame();
+
+            uCMyGame.DataContext = mainController;
+
+            grContent.Children.Clear();
+            grContent.Children.Add(uCMyGame);
+        }
+
+        private void btnProfile_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

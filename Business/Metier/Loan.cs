@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Vapeur.Business.DTO
+namespace Vapeur.Business.Metier
 {
     public class Loan
     {

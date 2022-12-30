@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Vapeur.Business.DTO;
+using Vapeur.Business.Metier;
 
 namespace Vapeur.Business.DAO
 {
@@ -79,13 +79,14 @@ namespace Vapeur.Business.DAO
                             {
                                 ID = reader.GetInt32(0),
                                 Game = new VideoGame(),
-                                Owner = new Player()
+                                Owner = new Player(),
+                                Loan = new Loan()
                             };
 
                             copy.Game.ID = reader.GetInt32(1);
                             copy.Owner.ID = reader.GetInt32(2);
 
-
+                            copies.Add(copy);
                         }
                     }
                 }
@@ -116,7 +117,11 @@ namespace Vapeur.Business.DAO
                             {
                                 ID = reader.GetInt32(0),
                                 Game = new VideoGame(),
-                                Owner = new Player()
+                                Owner = new Player(),
+                                Loan = new Loan {
+                                    Ongoing = false
+                                },
+
                             };
 
                             copy.Game.ID = reader.GetInt32(1);
@@ -126,6 +131,7 @@ namespace Vapeur.Business.DAO
                         }
                     }
                 }
+                /*
                 if (copy!=null)
                 {
                     GameDAO gameDAO = new GameDAO();
@@ -136,6 +142,7 @@ namespace Vapeur.Business.DAO
                     Player player = playerDAO.Read(copy.Owner.ID);
                     copy.Owner = player;
                 }
+                */
             }
             catch (SqlException e)
             {

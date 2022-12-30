@@ -5,7 +5,7 @@ using System.Linq;
 using System.Runtime.Intrinsics.Arm;
 using System.Text;
 using System.Threading.Tasks;
-using Vapeur.Business.DTO;
+using Vapeur.Business.Metier;
 
 namespace Vapeur.Business.DAO
 {
@@ -91,8 +91,6 @@ namespace Vapeur.Business.DAO
                             booking.Game.ID = reader.GetInt32(0);
                             booking.Booker.ID = reader.GetInt32(1);
 
-                            booking = Read(booking.Game.ID, booking.Booker.ID);
-
                             bookings.Add(booking);
 
                         }
@@ -142,6 +140,7 @@ namespace Vapeur.Business.DAO
                         }
                     }
                 }
+                /*
                 if (booking!=null)
                 {
                     //Completion de l'objet 
@@ -153,6 +152,7 @@ namespace Vapeur.Business.DAO
                     Player player = playerDAO.Read(booking.Booker.ID);
                     booking.Booker= player;
                 }
+                */
             }
             catch (SqlException e)
             {

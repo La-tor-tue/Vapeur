@@ -5,7 +5,7 @@ using System.Linq;
 using System.Runtime.Intrinsics.Arm;
 using System.Text;
 using System.Threading.Tasks;
-using Vapeur.Business.DTO;
+using Vapeur.Business.Metier;
 
 namespace Vapeur.Business.DAO
 {
@@ -108,7 +108,6 @@ namespace Vapeur.Business.DAO
                             loan.Copy.ID = reader.GetInt32(1);
                             loan.Borrower.ID = reader.GetInt32(0);
 
-                            loan = Read(loan.Copy.ID, loan.Borrower.ID);
 
                             loans.Add(loan);
 

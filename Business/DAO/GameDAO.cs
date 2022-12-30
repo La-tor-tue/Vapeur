@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Vapeur.Business.DTO;
+using Vapeur.Business.Metier;
 
 namespace Vapeur.Business.DAO
 {
@@ -81,13 +81,34 @@ namespace Vapeur.Business.DAO
                             ID = reader.GetInt32(0),
                             Title = reader.GetString(1),
                             CreditCost = reader.GetInt32(2),
-                            Console = reader.GetString(3)
-                        };
+                            Console = reader.GetString(3),
+                            Copies = new List<Copy>()
+                    };
 
                         games.Add(game);
                     }
                 }
             }
+            /*
+            if(games.Count > 0)
+            {
+                CopyDAO copyDAO = new CopyDAO();
+                List<Copy> copyList = new List<Copy>();
+                copyList= copyDAO.GetAll();
+
+                for (int i = 0; i < games.Count; i++)
+                {
+                    foreach (Copy copy in copyList)
+                    {
+                        if (copy.Game.ID == games[i].ID)
+                        {
+                            games[i].Copies.Add(copy);
+                        }
+                    }
+                    
+                }
+            }
+            */
             return games;
         }
 
@@ -110,16 +131,29 @@ namespace Vapeur.Business.DAO
                                 ID = reader.GetInt32(0),
                                 Title= reader.GetString(1),
                                 CreditCost= reader.GetInt32(2),
-                                Console= reader.GetString(3)
+                                Console= reader.GetString(3),
+                                Copies=new List<Copy>()
 
                             };
                         }
                     }
                 }
+                /*
                 if (game != null)
                 {
-                    
+                    CopyDAO copyDAO = new CopyDAO();
+                    List<Copy> copyList = new List<Copy>();
+                    copyList = copyDAO.GetAll();
+
+                        foreach (Copy copy in copyList)
+                        {
+                            if (copy.Game.ID == game.ID)
+                            {
+                                game.Copies.Add(copy);
+                            }
+                        }
                 }
+                */
             }
             catch (SqlException e)
             {
