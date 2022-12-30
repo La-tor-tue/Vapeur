@@ -83,10 +83,10 @@ namespace Vapeur.Business.DAO
                             {
                                 ID = reader.GetInt32(0),
                                 Username = reader.GetString(1),
-                                Credit = reader.GetInt32(3),
-                                Pseudo = reader.GetString(4),
-                                Registration = reader.GetDateTime(5),
-                                BirthDate = reader.GetDateTime(6)
+                                Credit = reader.GetInt32(4),
+                                Pseudo = reader.GetString(5),
+                                Registration = reader.GetDateTime(6),
+                                BirthDate = reader.GetDateTime(7)
                             };
 
                             players.Add(player);

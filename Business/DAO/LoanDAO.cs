@@ -108,7 +108,6 @@ namespace Vapeur.Business.DAO
                             loan.Copy.ID = reader.GetInt32(1);
                             loan.Borrower.ID = reader.GetInt32(0);
 
-                            loan = Read(loan.Copy.ID, loan.Borrower.ID);
 
                             loans.Add(loan);
 

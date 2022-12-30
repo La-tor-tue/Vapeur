@@ -15,8 +15,7 @@
             <Button x:Name="btnBook" Content="Annuler" Margin="0,10,0,0"/>
         </StackPanel>
         <Label Content="Vos reservations" HorizontalAlignment="Center" Margin="0,23,0,0" VerticalAlignment="Top"/>
-
-        <DataGrid Grid.Column="1"/>
+        <ListBox Grid.Column="1" d:ItemsSource="{Binding MyBookings}"/>
 
     </Grid>
 </UserControl>

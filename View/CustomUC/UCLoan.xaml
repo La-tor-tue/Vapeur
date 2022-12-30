@@ -15,8 +15,9 @@
             <Button x:Name="btnBook" Content="Terminer" Margin="0,10,0,0"/>
         </StackPanel>
         <Label Content="Vos locations" HorizontalAlignment="Center" Margin="0,23,0,0" VerticalAlignment="Top"/>
+        <ListBox Grid.Column="1" d:ItemsSource="{Binding MyLoans}"/>
 
-        <DataGrid Grid.Column="1"/>
+
 
     </Grid>
 </UserControl>

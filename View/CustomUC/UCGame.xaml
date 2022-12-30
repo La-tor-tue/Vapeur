@@ -17,8 +17,7 @@
         </StackPanel>
         <Label Content="Balance: " HorizontalAlignment="Center" Margin="0,66,0,0" VerticalAlignment="Top"/>
         <Label Content="Catalogue" HorizontalAlignment="Center" Margin="0,23,0,0" VerticalAlignment="Top"/>
-        
-        <DataGrid Grid.Column="1" ItemsSource="{Binding Games}"/>
+        <ListBox Grid.Column="1" d:ItemsSource="{Binding AllGames}"/>
 
     </Grid>
 </UserControl>
