@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.DirectoryServices.ActiveDirectory;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,9 +23,14 @@ namespace Vapeur
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+    /// 
     public partial class MainWindow : Window
-    {       
+    {
+
+
+        private MainController mainController;
         private readonly DAOFactory adf = DAOFactory.GetFactory(DAOFactoryType.MS_SQL_FACTORY);
+
         public MainWindow()
         {
             InitializeComponent();
@@ -32,9 +38,17 @@ namespace Vapeur
 
             UCGame uCGame = new UCGame();
 
-            CatalogueController catalogueController = new CatalogueController(adf);
+            mainController = new MainController(adf,new Player {
+                ID=4,
+                Username= "username",
+                Password= "username",
+                Credit=10,
+                Pseudo="Pseudo",
+                Registration=new DateTime(2022,12,28),
+                BirthDate=new DateTime(2022, 12, 28)
+            });;
 
-            uCGame.DataContext = catalogueController;
+            uCGame.DataContext= mainController;
 
             grContent.Children.Clear();
             grContent.Children.Add(uCGame);
@@ -45,6 +59,8 @@ namespace Vapeur
         {
             UCGame uCGame = new UCGame();
 
+            uCGame.DataContext = mainController;
+
             grContent.Children.Clear();
             grContent.Children.Add(uCGame);
         }
@@ -53,6 +69,7 @@ namespace Vapeur
         {
             UCBooking uCBooking= new UCBooking();
 
+            uCBooking.DataContext = mainController;
             grContent.Children.Clear();
             grContent.Children.Add(uCBooking);
         }
@@ -61,6 +78,7 @@ namespace Vapeur
         {
             UCLoan uCLoan =new UCLoan();
 
+            uCLoan.DataContext = mainController;
             grContent.Children.Clear();
             grContent.Children.Add(uCLoan);
         }
@@ -69,10 +87,7 @@ namespace Vapeur
         {
             UCMyGame uCMyGame=new UCMyGame();
 
-            PlayerController playerController = new PlayerController(adf, 4);
-
-            uCMyGame.DataContext = playerController;
-
+            uCMyGame.DataContext = mainController;
 
             grContent.Children.Clear();
             grContent.Children.Add(uCMyGame);

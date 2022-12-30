@@ -89,6 +89,7 @@ namespace Vapeur.Business.DAO
                     }
                 }
             }
+            /*
             if(games.Count > 0)
             {
                 CopyDAO copyDAO = new CopyDAO();
@@ -107,6 +108,7 @@ namespace Vapeur.Business.DAO
                     
                 }
             }
+            */
             return games;
         }
 
@@ -136,6 +138,7 @@ namespace Vapeur.Business.DAO
                         }
                     }
                 }
+                /*
                 if (game != null)
                 {
                     CopyDAO copyDAO = new CopyDAO();
@@ -150,6 +153,7 @@ namespace Vapeur.Business.DAO
                             }
                         }
                 }
+                */
             }
             catch (SqlException e)
             {
