@@ -80,10 +80,12 @@ namespace Vapeur.Business.DAO
                                 ID = reader.GetInt32(0),
                                 Game = new VideoGame(),
                                 Owner = new Player(),
+
                                 Loan = new Loan
                                 {
                                     Ongoing = false
                                 },
+
                             };
 
                             copy.Game.ID = reader.GetInt32(1);

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+
 using System.Globalization;
+
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -69,6 +71,7 @@ namespace Vapeur.Business.Controller
             SelectedStartDate = DateTime.Now;
             SelectedEndDate = DateTime.Now;
 
+
             InitAll();
         }
         #endregion
@@ -88,6 +91,7 @@ namespace Vapeur.Business.Controller
         public ObservableCollection<Copy> AllCopies { get { return allCopies; } set { allCopies = value; } }
         public ObservableCollection<VideoGame> AllGames { get { return allGames; } set { allGames = value; } }
 
+
         public Copy SelectedCopy { get; set; }
         public VideoGame SelectedGame { get; set; }
         public Player SelectedPlayer { get; set; }
@@ -96,6 +100,7 @@ namespace Vapeur.Business.Controller
         public DateTime SelectedStartDate { get; set; }
         public DateTime SelectedEndDate { get; set; }
         public int PriceCost { get; set; }
+
 
         #endregion
 
@@ -128,8 +133,10 @@ namespace Vapeur.Business.Controller
             for (int i = 0; i < AllLoans.Count; i++)
             {
                 AllLoans[i].Copy = copyDAO.Read(AllLoans[i].Copy.ID);
+
                 AllLoans[i].Copy.Game = gameDAO.Read(AllLoans[i].Copy.Game.ID);
                 AllLoans[i].Lender = playerDAO.Read(AllLoans[i].Copy.Owner.ID);
+
 
                 AllLoans[i].Borrower = playerDAO.Read(AllLoans[i].Borrower.ID);
             }
@@ -223,7 +230,9 @@ namespace Vapeur.Business.Controller
 
             for (int i = 0; i < AllGames.Count; i++)
             {
+
                 AllGames[i].Copies = new List<Copy>();
+
 
                 foreach (Copy copy in AllCopies)
                 {
@@ -248,6 +257,7 @@ namespace Vapeur.Business.Controller
         #endregion
 
         #endregion
+
 
         #region Function Methode
         public void CreateCopy()
@@ -547,5 +557,6 @@ namespace Vapeur.Business.Controller
         }
 
         #endregion
+
     }
 }
