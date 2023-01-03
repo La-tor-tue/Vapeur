@@ -12,10 +12,10 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <StackPanel HorizontalAlignment="Center" Margin="0,106,0,0" Orientation="Vertical" VerticalAlignment="Top">
-            <Button x:Name="btnBook" Content="Terminer" Margin="0,10,0,0"/>
+            <Button x:Name="btnEndLoan" Content="Terminer" Margin="0,10,0,0" Click="btnEndLoan_Click"/>
         </StackPanel>
         <Label Content="Vos locations" HorizontalAlignment="Center" Margin="0,23,0,0" VerticalAlignment="Top"/>
-        <ListBox Grid.Column="1" d:ItemsSource="{Binding MyLoans}"/>
+        <ListBox SelectedItem="{Binding SelectedLoan}" Grid.Column="1" ItemsSource="{Binding MyLoans}"/>
 
 
 

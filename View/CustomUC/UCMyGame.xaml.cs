@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Vapeur.Business.Controller;
 
 namespace Vapeur.View.CustomUC
 {
@@ -23,6 +24,15 @@ namespace Vapeur.View.CustomUC
         public UCMyGame()
         {
             InitializeComponent();
+        }
+
+        private void btnCreateCopy_Click(object sender, RoutedEventArgs e)
+        {
+            DataEntry.DECreateCopy dECreateCopy= new DataEntry.DECreateCopy();
+
+            dECreateCopy.DataContext= this.DataContext as MainController;
+
+            dECreateCopy.ShowDialog();
         }
     }
 }

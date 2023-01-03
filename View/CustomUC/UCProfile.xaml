@@ -24,16 +24,20 @@
             <TextBox IsReadOnly="True" TextWrapping="Wrap" Text="{Binding Credit}" Width="120" Height="18"/>
         </StackPanel>
 
-        <StackPanel Grid.Column="2" HorizontalAlignment="Center" Orientation="Vertical" VerticalAlignment="Center" Height="114" Width="120">
+        <StackPanel Grid.Column="2" HorizontalAlignment="Center" Orientation="Vertical" VerticalAlignment="Center" Height="174" Width="120">
             <TextBox IsReadOnly="True" TextWrapping="Wrap" Text="{Binding Username}" Width="120" Margin="0,10,0,10"/>
-            <TextBox TextWrapping="Wrap" Text="{Binding Pseudo}" Width="120" Margin="0,10,0,10"/>
-        </StackPanel>
-        
-        <StackPanel Grid.Column="1" HorizontalAlignment="Center" Orientation="Vertical" VerticalAlignment="Center" Height="138">
-            <Label Content="Username :" Margin="0,10,0,5"/>
-            <Label Content="Pseudo :" Margin="0,10,0,5"/>
+            <TextBox IsReadOnly="True" TextWrapping="Wrap" Text="{Binding Pseudo}" Width="120" Margin="0,10,0,10"/>
+            <TextBox IsReadOnly="True" TextWrapping="Wrap" Text="{Binding Registration}" Width="120" Margin="0,10,0,10"/>
+            <TextBox IsReadOnly="True" TextWrapping="Wrap" Text="{Binding BirthDate}" Width="120" Margin="0,10,0,10"/>
         </StackPanel>
 
-        <Button x:Name="btnEnregistrer" Grid.Column="3" Content="Enregistrer" HorizontalAlignment="Center" Margin="0,50,0,0" VerticalAlignment="Top" Height="20" Width="61" Grid.Row="1" Click="btnEnregistrer_Click"/>
+        <StackPanel Grid.Column="1" HorizontalAlignment="Center" Orientation="Vertical" VerticalAlignment="Center" Height="153">
+            <Label Content="Username :" Margin="0,10,0,5"/>
+            <Label Content="Pseudo :" Margin="0,10,0,5"/>
+            <Label Content="Date d'enregistrement :" Margin="0,10,0,5"/>
+            <Label Content="Date de naissance :" Margin="0,10,0,5"/>
+        </StackPanel>
+
+        <Button x:Name="btnEditProfile" Grid.Column="3" Content="Editer" HorizontalAlignment="Center" Margin="0,50,0,0" VerticalAlignment="Top" Height="20" Width="61" Grid.Row="1" Click="btnEditProfile_Click"/>
     </Grid>
 </UserControl>

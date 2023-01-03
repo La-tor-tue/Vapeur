@@ -20,6 +20,11 @@ namespace Vapeur.Business.Metier
         public Player Owner { get { return owner; } set { owner = value; } }
         public Loan Loan { get { return loan; } set { loan=value; } }
 
+        public override string ToString()
+        {
+            return Game.Title+"  sur  "+Game.Console;
+        }
+
         public bool IsAvaible()
         {
             if (Loan.Ongoing)
