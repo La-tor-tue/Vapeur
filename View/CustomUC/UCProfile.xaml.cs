@@ -13,26 +13,27 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Vapeur.Business.Controller;
+using Vapeur.View.DataEntry;
 
 namespace Vapeur.View.CustomUC
 {
     /// <summary>
-    /// Logique d'interaction pour UCMyGame.xaml
+    /// Logique d'interaction pour UCProfile.xaml
     /// </summary>
-    public partial class UCMyGame : UserControl
+    public partial class UCProfile : UserControl
     {
-        public UCMyGame()
+        public UCProfile()
         {
             InitializeComponent();
+
         }
 
-        private void btnCreateCopy_Click(object sender, RoutedEventArgs e)
+        private void btnEditProfile_Click(object sender, RoutedEventArgs e)
         {
-            DataEntry.DECreateCopy dECreateCopy= new DataEntry.DECreateCopy();
+            DEEditProfile dEEditProfile= new DEEditProfile();
 
-            dECreateCopy.DataContext= this.DataContext as MainController;
-
-            dECreateCopy.ShowDialog();
+            dEEditProfile.DataContext= this.DataContext as MainController;
+            dEEditProfile.ShowDialog();
         }
     }
 }

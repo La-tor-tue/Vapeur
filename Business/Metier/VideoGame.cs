@@ -25,15 +25,23 @@ namespace Vapeur.Business.Metier
 
         public Copy CopyAvaible()
         {
-            foreach (Copy copy in Copies)
+
+            if (Copies.Count!=0)
             {
-                if (copy.IsAvaible())
+                for (int i = 0; i < Copies.Count; i++)
                 {
-                    return copy;
+                    if (Copies[i].IsAvaible())
+                    {
+                        return Copies[i];
+                    }
                 }
             }
-
             return null;
+        }
+
+        public override string ToString()
+        {
+            return Title+"  sur  "+Console+" pour le prix: "+CreditCost+" crédit(s)";
         }
 
         #region selectBooking
@@ -116,7 +124,7 @@ namespace Vapeur.Business.Metier
 
             foreach (Booking booking in bookings)
             {
-                if (booking.BookingDate>oldest)
+                if (booking.BookingDate.Date>oldest.Date)
                 {
                     oldest = booking.BookingDate;
                 }
@@ -124,7 +132,7 @@ namespace Vapeur.Business.Metier
 
             foreach (Booking booking in bookings)
             {
-                if (booking.BookingDate==oldest)
+                if (booking.BookingDate.Date ==oldest.Date)
                 {
                     possibleBooking.Add(booking);
                 }
@@ -146,7 +154,7 @@ namespace Vapeur.Business.Metier
 
             foreach (Booking booking in bookings)
             {
-                if (booking.Booker.Registration > oldest)
+                if (booking.Booker.Registration.Date > oldest.Date)
                 {
                     oldest = booking.Booker.Registration;
                 }
@@ -154,7 +162,7 @@ namespace Vapeur.Business.Metier
 
             foreach (Booking booking in bookings)
             {
-                if (booking.Booker.Registration == oldest)
+                if (booking.Booker.Registration.Date == oldest.Date)
                 {
                     possibleBooking.Add(booking);
                 }
@@ -176,7 +184,7 @@ namespace Vapeur.Business.Metier
 
             foreach (Booking booking in bookings)
             {
-                if (booking.Booker.BirthDate > oldest)
+                if (booking.Booker.BirthDate.Date > oldest.Date)
                 {
                     oldest = booking.Booker.BirthDate;
                 }
@@ -184,7 +192,7 @@ namespace Vapeur.Business.Metier
 
             foreach (Booking booking in bookings)
             {
-                if (booking.Booker.BirthDate == oldest)
+                if (booking.Booker.BirthDate.Date == oldest.Date)
                 {
                     possibleBooking.Add(booking);
                 }

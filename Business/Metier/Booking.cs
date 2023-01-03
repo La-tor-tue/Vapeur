@@ -22,5 +22,10 @@ namespace Vapeur.Business.Metier
 
         public Player Booker { get { return booker; } set { booker = value; } }
 
+        public override string ToString()
+        {
+            return "Reservation de: "+Booker.Username+" pour le jeux: "+Game.ToString()+" en date du: "+BookingDate;
+        }
+
     }
 }

@@ -1,0 +1,30 @@
+﻿<Window x:Class="Vapeur.View.DataEntry.DESelectDate"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Vapeur.View.DataEntry"
+        mc:Ignorable="d"
+        Title="Selection de date" Height="400" Width="400"
+        ResizeMode="NoResize">
+    <Grid Background="#FF4E626B">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="80.008"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Label Content="Selectionnez une date de début et de fin pour votre location:" HorizontalAlignment="Left" Margin="34,37,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="26" Width="332"/>
+        <Label Content="Début" HorizontalAlignment="Center" Margin="0,104,0,0" VerticalAlignment="Top" Height="26" Width="54"/>
+        <Label Grid.Column="1" Content="Fin" HorizontalAlignment="Left" Margin="84,104,0,0" VerticalAlignment="Top"/>
+        <DatePicker SelectedDate="{Binding SelectedStartDate}" HorizontalAlignment="Center" Margin="0,168,0,0" VerticalAlignment="Top" DisplayDate="2023-02-01" FirstDayOfWeek="Monday"/>
+        <DatePicker SelectedDate="{Binding SelectedEndDate}" Grid.Column="1" HorizontalAlignment="Left" Margin="22,168,0,0" VerticalAlignment="Top"/>
+        
+        <StackPanel Margin="30,25,29,0" Orientation="Horizontal" Grid.Row="1" VerticalAlignment="Top" Grid.Column="1" Height="20">
+            <Button x:Name="btnSaveCreate" Content="Enregistrer" Margin="10,0,10,0" Click="btnSaveCreate_Click"/>
+        </StackPanel>
+
+    </Grid>
+</Window>

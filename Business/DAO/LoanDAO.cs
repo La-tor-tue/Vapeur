@@ -19,12 +19,12 @@ namespace Vapeur.Business.DAO
             {
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    SqlCommand cmd = new SqlCommand($"INSERT INTO dbo.loan (idPlayer,idCopy,startDate,endDate,ongoing) VALUES ( @idP,@idC, @start,@end,@ongoing)", connection);
+                    SqlCommand cmd = new SqlCommand($"INSERT INTO dbo.loan (idPlayer,idCopy,startDate,endDate,ongoing,isNew) VALUES ( @idP,@idC, @start,@end,@ongoing,@isNew)", connection);
                     
                     cmd.Parameters.AddWithValue("idP", obj.Borrower.ID);
                     cmd.Parameters.AddWithValue("idC", obj.Copy.ID);
-                    cmd.Parameters.AddWithValue("start", obj.StartDate);
-                    cmd.Parameters.AddWithValue("end", obj.EndDate);
+                    cmd.Parameters.AddWithValue("start", obj.StartDate.Date);
+                    cmd.Parameters.AddWithValue("end", obj.EndDate.Date);
                     if (obj.Ongoing)
                     {
                         cmd.Parameters.AddWithValue("ongoing", 1);
@@ -32,6 +32,14 @@ namespace Vapeur.Business.DAO
                     else
                     {
                         cmd.Parameters.AddWithValue("ongoing", 0);
+                    }
+                    if (obj.IsNew)
+                    {
+                        cmd.Parameters.AddWithValue("isNew", 1);
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("isNew", 0);
                     }
 
                     connection.Open();
@@ -93,7 +101,7 @@ namespace Vapeur.Business.DAO
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
-                        if (reader.Read())
+                        while (reader.Read())
                         {
 
                             Loan loan = new Loan
@@ -101,6 +109,7 @@ namespace Vapeur.Business.DAO
                                 StartDate = reader.GetDateTime(2),
                                 EndDate = reader.GetDateTime(3),
                                 Ongoing = reader.GetInt32(4) == 1,
+                                IsNew = reader.GetInt32(5) == 1,
                                 Copy = new Copy(),
                                 Borrower = new Player(),
                             };
@@ -149,6 +158,7 @@ namespace Vapeur.Business.DAO
                                 StartDate = reader.GetDateTime(2),
                                 EndDate= reader.GetDateTime(3),
                                 Ongoing= reader.GetInt32(4) == 1,
+                                IsNew = reader.GetInt32(5) == 1,
                                 Copy = new Copy(),
                                 Borrower = new Player(),
                             };
@@ -160,6 +170,7 @@ namespace Vapeur.Business.DAO
                         }
                     }
                 }
+                /*
                 if (loan != null)
                 {
                     //Completion de l'objet 
@@ -172,6 +183,7 @@ namespace Vapeur.Business.DAO
                     Player player = playerDAO.Read(loan.Borrower.ID);
                     loan.Borrower = player;
                 }
+                */
             }
             catch (SqlException e)
             {
@@ -187,7 +199,7 @@ namespace Vapeur.Business.DAO
             {
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    SqlCommand cmd = new SqlCommand($"UPDATE dbo.loan SET ongoing = @ongoing WHERE idPlayer = @idP and idCopy = @idC", connection);
+                    SqlCommand cmd = new SqlCommand($"UPDATE dbo.loan SET ongoing = @ongoing, isNew = @isNew , startDate = @start , endDate = @end WHERE idPlayer = @idP and idCopy = @idC", connection);
 
                     if (obj.Ongoing)
                     {
@@ -197,8 +209,18 @@ namespace Vapeur.Business.DAO
                     {
                         cmd.Parameters.AddWithValue("ongoing", 0);
                     }
+                    if (obj.IsNew)
+                    {
+                        cmd.Parameters.AddWithValue("isNew", 1);
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("isNew", 0);
+                    }
                     cmd.Parameters.AddWithValue("idP", obj.Borrower.ID);
                     cmd.Parameters.AddWithValue("idC", obj.Copy.ID);
+                    cmd.Parameters.AddWithValue("start", obj.StartDate.Date);
+                    cmd.Parameters.AddWithValue("end", obj.EndDate.Date);
 
                     connection.Open();
                     int res = cmd.ExecuteNonQuery();

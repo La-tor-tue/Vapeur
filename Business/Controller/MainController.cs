@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+
+using System.Globalization;
+
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -63,6 +66,11 @@ namespace Vapeur.Business.Controller
 
             
             this.playerLogged = playerLogged;
+            SelectedPlayer = this.playerLogged;
+
+            SelectedStartDate = DateTime.Now;
+            SelectedEndDate = DateTime.Now;
+
 
             InitAll();
         }
@@ -82,6 +90,17 @@ namespace Vapeur.Business.Controller
         public ObservableCollection<Booking> AllBookings { get { return allBookings; } set { allBookings = value; } }
         public ObservableCollection<Copy> AllCopies { get { return allCopies; } set { allCopies = value; } }
         public ObservableCollection<VideoGame> AllGames { get { return allGames; } set { allGames = value; } }
+
+
+        public Copy SelectedCopy { get; set; }
+        public VideoGame SelectedGame { get; set; }
+        public Player SelectedPlayer { get; set; }
+        public Loan SelectedLoan { get; set; }
+        public Booking SelectedBooking { get; set; }
+        public DateTime SelectedStartDate { get; set; }
+        public DateTime SelectedEndDate { get; set; }
+        public int PriceCost { get; set; }
+
 
         #endregion
 
@@ -114,7 +133,10 @@ namespace Vapeur.Business.Controller
             for (int i = 0; i < AllLoans.Count; i++)
             {
                 AllLoans[i].Copy = copyDAO.Read(AllLoans[i].Copy.ID);
-                AllLoans[i].Lender = AllLoans[i].Copy.Owner;
+
+                AllLoans[i].Copy.Game = gameDAO.Read(AllLoans[i].Copy.Game.ID);
+                AllLoans[i].Lender = playerDAO.Read(AllLoans[i].Copy.Owner.ID);
+
 
                 AllLoans[i].Borrower = playerDAO.Read(AllLoans[i].Borrower.ID);
             }
@@ -208,6 +230,10 @@ namespace Vapeur.Business.Controller
 
             for (int i = 0; i < AllGames.Count; i++)
             {
+
+                AllGames[i].Copies = new List<Copy>();
+
+
                 foreach (Copy copy in AllCopies)
                 {
                     if (copy.Game.ID == AllGames[i].ID)
@@ -229,6 +255,306 @@ namespace Vapeur.Business.Controller
             AllPlayers= new ObservableCollection<Player>(players);
         }
         #endregion
+
+        #endregion
+
+
+        #region Function Methode
+        public void CreateCopy()
+        {
+            Copy newCopy = new Copy
+            {
+                Owner = PlayerLogged,
+                Game = SelectedGame
+            };
+
+
+            
+
+
+            copyDAO.Create(newCopy);
+            MyCopies.Add(newCopy);
+            AllCopies.Add(newCopy);
+
+            InitAll();
+
+
+            List<Booking> bookings = new List<Booking>();
+
+            foreach (Booking booking in AllBookings)
+            {
+                if (booking.Game.ID == newCopy.Game.ID)
+                {
+                    bookings.Add(booking);
+                }
+            }
+
+
+            if (bookings.Count > 0)
+            {
+                SelectedBooking = newCopy.Game.SelectBooking(bookings);
+                Loan newLoan = new Loan
+                {
+                    Borrower = SelectedBooking.Booker,
+                    StartDate = DateTime.Today,
+                    EndDate = DateTime.Today,
+                    Ongoing = false,
+                    IsNew = true,
+                    Copy = newCopy,
+                };
+                bookingDAO.Delete(SelectedBooking);
+                loanDAO.Create(newLoan);
+            }
+
+            SelectedGame = null;
+        }
+
+        public void EditProfile()
+        {
+            if (SelectedPlayer.Pseudo!=PlayerLogged.Pseudo)
+            {
+                playerDAO.Update(SelectedPlayer);
+                PlayerLogged = SelectedPlayer;
+            }
+            else
+            {
+                SelectedPlayer = PlayerLogged;
+            }
+        }
+
+        public void CancelBooking()
+        {
+            if (bookingDAO.Delete(SelectedBooking))
+            {
+                AllBookings.Remove(SelectedBooking);
+                MyBookings.Remove(SelectedBooking);
+            }
+
+            SelectedBooking = null;
+
+        }
+
+        public bool CanBorrow()
+        {
+            if (PlayerLogged.LoanAllowed())
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool IsPossible()
+        {
+            if (SelectedGame.CopyAvaible!=null)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool CreateLoan()
+        {
+            SelectedCopy = SelectedGame.CopyAvaible();
+
+            Loan loan = new Loan
+            {
+                Copy = SelectedCopy,
+                Borrower = PlayerLogged,
+                StartDate = SelectedStartDate,
+                EndDate = SelectedEndDate,
+                IsNew = false,
+
+            };
+
+            loan.Lender = loan.Copy.Owner;
+
+            if (SelectedStartDate.Date == DateTime.Now.Date)
+            {
+                loan.Ongoing = true;
+            }
+
+            foreach (Loan loanTMP in AllLoans)
+            {
+                if (loan.Copy.Game.ID==loanTMP.Copy.Game.ID && loan.Borrower.ID==loanTMP.Borrower.ID)
+                {
+                    return false;
+                }
+            }
+
+            loanDAO.Create(loan);
+
+            //Recherger les donées afin de prendre en compte les changements
+            InitAllLoans();
+            InitMyLoans();
+            InitAllCopies();
+            InitMyCopies();
+            InitAllGames();
+
+            SelectedStartDate= DateTime.Now;
+            SelectedEndDate= DateTime.Now;
+            SelectedCopy = null;
+            SelectedGame = null;
+
+            return true;
+
+        }
+
+        public bool CreateBooking()
+        {
+            Booking booking = new Booking {
+                Booker= PlayerLogged,
+                BookingDate= DateTime.Now,
+                Game= SelectedGame,
+            };
+
+            if (AllBookings.Contains(booking))
+            {
+                return false;
+            }
+
+            bookingDAO.Create(booking);
+
+            AllBookings.Add(booking);
+            MyBookings.Add(booking);
+            SelectedGame = null;
+
+            return true;
+        }
+
+        public void EndLoan()
+        {
+            PriceCost = GetPrice();
+
+            PlayerLogged.Credit = PlayerLogged.Credit - PriceCost;
+            SelectedLoan.Lender.Credit = SelectedLoan.Lender.Credit + PriceCost;
+
+            if (PlayerLogged.ID!=SelectedLoan.Lender.ID)
+            {
+                playerDAO.Update(PlayerLogged);
+                playerDAO.Update(SelectedLoan.Lender);
+            }
+          
+
+            loanDAO.Delete(SelectedLoan);
+
+
+            List<Booking> bookings= new List<Booking>();
+
+            foreach (Booking booking in AllBookings)
+            {
+                if (booking.Game.ID==SelectedLoan.Copy.Game.ID)
+                {
+                    bookings.Add(booking);
+                }
+            }
+
+
+            if (bookings.Count>0)
+            {
+                SelectedBooking = SelectedLoan.Copy.Game.SelectBooking(bookings);
+                Loan newLoan = new Loan {
+                    Borrower = SelectedBooking.Booker,
+                    StartDate = DateTime.Today,
+                    EndDate = DateTime.Today,
+                    Ongoing = false,
+                    IsNew = true,
+                    Copy=SelectedLoan.Copy,
+                };
+                bookingDAO.Delete(SelectedBooking);
+                loanDAO.Create(newLoan);
+            }
+
+
+            InitAll();
+
+            SelectedLoan = null;
+            SelectedBooking = null;
+        }
+
+
+
+        public int GetPrice() {
+            int price = 0;
+            if (SelectedLoan.EndDate.Date>=DateTime.Today)
+            {
+                price = CalculatePrice(SelectedLoan.StartDate, DateTime.Today);
+            }
+            else
+            {
+                price = CalculatePrice(SelectedLoan.StartDate.Date, SelectedLoan.EndDate.Date);
+                price = price + (DateTime.Today.DayOfYear - SelectedLoan.EndDate.DayOfYear) * 5;
+            }
+
+            return price;
+        }
+
+        public int CalculatePrice(DateTime startDate,DateTime endDate) {
+            int price = 0;
+   
+            int nDays = endDate.DayOfYear - startDate.DayOfYear;
+
+            if (nDays ==0)
+            {
+                price = SelectedLoan.Copy.Game.CreditCost;
+            }
+            else
+            {
+                if (nDays % 7 == 0)
+                {
+                    price = SelectedLoan.Copy.Game.CreditCost * (nDays / 7);
+                }
+                else
+                {
+                    price = SelectedLoan.Copy.Game.CreditCost * (((nDays - nDays % 7) / 7) + 1);
+                }
+            }
+            
+
+            return price;
+        }
+
+        public bool HasNewLoan()
+        {
+            foreach (Loan loan in MyLoans)
+            {
+                if (loan.IsNew)
+                {
+                    SelectedLoan=loan;
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public void UpdateLoan()
+        {
+            SelectedLoan.StartDate = SelectedStartDate;
+            SelectedLoan.EndDate = SelectedEndDate;
+            SelectedLoan.IsNew = false;
+
+            if (SelectedStartDate.Date == DateTime.Now.Date)
+            {
+                SelectedLoan.Ongoing = true;
+            }
+            else
+            {
+                SelectedLoan.Ongoing = false;
+            }
+
+            loanDAO.Update(SelectedLoan);
+
+            InitAllLoans();
+            InitMyLoans();
+            InitAllCopies();
+            InitMyCopies();
+            InitAllGames();
+
+            SelectedStartDate = DateTime.Now;
+            SelectedEndDate = DateTime.Now;
+            SelectedLoan = null;
+
+        }
 
         #endregion
 

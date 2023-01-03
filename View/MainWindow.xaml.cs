@@ -17,6 +17,7 @@ using Vapeur.Business.Controller;
 using Vapeur.Business.DAO;
 using Vapeur.Business.Metier;
 using Vapeur.View.CustomUC;
+using Vapeur.View.DataEntry;
 
 namespace Vapeur
 {
@@ -35,8 +36,39 @@ namespace Vapeur
         {
             InitializeComponent();
 
+            mainController = new MainController(adf,new Player {
+                ID=4,
+                Username= "username",
+                Password= "username",
+                Credit=10,
+                Pseudo="Pseudo",
+                Registration=new DateTime(2022,12,28),
+                BirthDate=new DateTime(2022, 12, 28)
+            });;
 
+
+            while(mainController.HasNewLoan())
+            {
+                MessageBoxResult result = MessageBox.Show($"Une copie est disponible pour un jeux que vous aviez reservé: {mainController.SelectedLoan.Copy.Game.ToString}\n Voulez-vous le louer?", "Attention", MessageBoxButton.YesNo, MessageBoxImage.Information);
+                switch (result)
+                {
+                    case MessageBoxResult.Yes:
+
+                        DESelectDate dESelectDate = new DESelectDate();
+                        dESelectDate.DataContext= mainController;
+                        dESelectDate.ShowDialog();
+
+                        mainController.UpdateLoan();
+
+                        break;
+                    case MessageBoxResult.No:
+                        break;
+                    default:
+                        break;
+                }
+            }
             UCGame uCGame = new UCGame();
+
 
             mainController = new MainController(adf,new Player {
                 ID=4,
@@ -52,7 +84,6 @@ namespace Vapeur
 
             grContent.Children.Clear();
             grContent.Children.Add(uCGame);
-
         }
 
         private void btnGame_Click(object sender, RoutedEventArgs e)
@@ -70,6 +101,9 @@ namespace Vapeur
             UCBooking uCBooking= new UCBooking();
 
             uCBooking.DataContext = mainController;
+
+            mainController.SelectedBooking = null;
+
             grContent.Children.Clear();
             grContent.Children.Add(uCBooking);
         }
@@ -95,7 +129,11 @@ namespace Vapeur
 
         private void btnProfile_Click(object sender, RoutedEventArgs e)
         {
+            UCProfile uCProfile=new UCProfile();
+            uCProfile.DataContext = mainController;
 
+            grContent.Children.Clear();
+            grContent.Children.Add(uCProfile);
         }
     }
 }

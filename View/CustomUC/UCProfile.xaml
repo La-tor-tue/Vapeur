@@ -1,0 +1,43 @@
+﻿<UserControl x:Class="Vapeur.View.CustomUC.UCProfile"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Vapeur.View.CustomUC"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Background="#FF4E626B" DataContext="{Binding PlayerLogged}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="32*"/>
+            <RowDefinition Height="13*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="160"/>
+            <ColumnDefinition Width="271*"/>
+            <ColumnDefinition Width="262*"/>
+            <ColumnDefinition Width="107*"/>
+        </Grid.ColumnDefinitions>
+        <Label Content="Votre Profile" HorizontalAlignment="Center" Margin="0,30,0,0" VerticalAlignment="Top" Height="26" Width="76"/>
+
+        <StackPanel HorizontalAlignment="Center" Margin="0,115,0,0" Orientation="Vertical" VerticalAlignment="Top">
+            <Label Content="Votre crédit:" Height="26" Width="74"/>
+            <TextBox IsReadOnly="True" TextWrapping="Wrap" Text="{Binding Credit}" Width="120" Height="18"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="2" HorizontalAlignment="Center" Orientation="Vertical" VerticalAlignment="Center" Height="174" Width="120">
+            <TextBox IsReadOnly="True" TextWrapping="Wrap" Text="{Binding Username}" Width="120" Margin="0,10,0,10"/>
+            <TextBox IsReadOnly="True" TextWrapping="Wrap" Text="{Binding Pseudo}" Width="120" Margin="0,10,0,10"/>
+            <TextBox IsReadOnly="True" TextWrapping="Wrap" Text="{Binding Registration}" Width="120" Margin="0,10,0,10"/>
+            <TextBox IsReadOnly="True" TextWrapping="Wrap" Text="{Binding BirthDate}" Width="120" Margin="0,10,0,10"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" HorizontalAlignment="Center" Orientation="Vertical" VerticalAlignment="Center" Height="153">
+            <Label Content="Username :" Margin="0,10,0,5"/>
+            <Label Content="Pseudo :" Margin="0,10,0,5"/>
+            <Label Content="Date d'enregistrement :" Margin="0,10,0,5"/>
+            <Label Content="Date de naissance :" Margin="0,10,0,5"/>
+        </StackPanel>
+
+        <Button x:Name="btnEditProfile" Grid.Column="3" Content="Editer" HorizontalAlignment="Center" Margin="0,50,0,0" VerticalAlignment="Top" Height="20" Width="61" Grid.Row="1" Click="btnEditProfile_Click"/>
+    </Grid>
+</UserControl>
