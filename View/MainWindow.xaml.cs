@@ -69,7 +69,21 @@ namespace Vapeur
             }
             UCGame uCGame = new UCGame();
 
+<<<<<<< HEAD
             uCGame.DataContext = mainController;
+=======
+            mainController = new MainController(adf,new Player {
+                ID=4,
+                Username= "username",
+                Password= "username",
+                Credit=10,
+                Pseudo="Pseudo",
+                Registration=new DateTime(2022,12,28),
+                BirthDate=new DateTime(2022, 12, 28)
+            });;
+
+            uCGame.DataContext= mainController;
+>>>>>>> 2e7684875e1c639324fd7c68fca1e1f4a90a2473
 
             grContent.Children.Clear();
             grContent.Children.Add(uCGame);
@@ -90,7 +104,10 @@ namespace Vapeur
             UCBooking uCBooking= new UCBooking();
 
             uCBooking.DataContext = mainController;
+<<<<<<< HEAD
             mainController.SelectedBooking = null;
+=======
+>>>>>>> 2e7684875e1c639324fd7c68fca1e1f4a90a2473
             grContent.Children.Clear();
             grContent.Children.Add(uCBooking);
         }

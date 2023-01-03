@@ -21,6 +21,10 @@
 
         </ListBox>
         
+<<<<<<< HEAD
+=======
+        <DataGrid Grid.Column="1" ItemsSource="{Binding AllGames}"/>
+>>>>>>> 2e7684875e1c639324fd7c68fca1e1f4a90a2473
 
     </Grid>
 </UserControl>

@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+<<<<<<< HEAD
 using System.Globalization;
+=======
+>>>>>>> 2e7684875e1c639324fd7c68fca1e1f4a90a2473
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -64,10 +67,13 @@ namespace Vapeur.Business.Controller
 
             
             this.playerLogged = playerLogged;
+<<<<<<< HEAD
             SelectedPlayer = this.playerLogged;
 
             SelectedStartDate = DateTime.Now;
             SelectedEndDate = DateTime.Now;
+=======
+>>>>>>> 2e7684875e1c639324fd7c68fca1e1f4a90a2473
 
             InitAll();
         }
@@ -88,6 +94,7 @@ namespace Vapeur.Business.Controller
         public ObservableCollection<Copy> AllCopies { get { return allCopies; } set { allCopies = value; } }
         public ObservableCollection<VideoGame> AllGames { get { return allGames; } set { allGames = value; } }
 
+<<<<<<< HEAD
         public Copy SelectedCopy { get; set; }
         public VideoGame SelectedGame { get; set; }
         public Player SelectedPlayer { get; set; }
@@ -97,6 +104,8 @@ namespace Vapeur.Business.Controller
         public DateTime SelectedEndDate { get; set; }
         public int PriceCost { get; set; }
 
+=======
+>>>>>>> 2e7684875e1c639324fd7c68fca1e1f4a90a2473
         #endregion
 
         #region INIT Methodes
@@ -128,8 +137,12 @@ namespace Vapeur.Business.Controller
             for (int i = 0; i < AllLoans.Count; i++)
             {
                 AllLoans[i].Copy = copyDAO.Read(AllLoans[i].Copy.ID);
+<<<<<<< HEAD
                 AllLoans[i].Copy.Game = gameDAO.Read(AllLoans[i].Copy.Game.ID);
                 AllLoans[i].Lender = playerDAO.Read(AllLoans[i].Copy.Owner.ID);
+=======
+                AllLoans[i].Lender = AllLoans[i].Copy.Owner;
+>>>>>>> 2e7684875e1c639324fd7c68fca1e1f4a90a2473
 
                 AllLoans[i].Borrower = playerDAO.Read(AllLoans[i].Borrower.ID);
             }
@@ -223,8 +236,11 @@ namespace Vapeur.Business.Controller
 
             for (int i = 0; i < AllGames.Count; i++)
             {
+<<<<<<< HEAD
                 AllGames[i].Copies = new List<Copy>();
 
+=======
+>>>>>>> 2e7684875e1c639324fd7c68fca1e1f4a90a2473
                 foreach (Copy copy in AllCopies)
                 {
                     if (copy.Game.ID == AllGames[i].ID)
@@ -249,6 +265,7 @@ namespace Vapeur.Business.Controller
 
         #endregion
 
+<<<<<<< HEAD
         #region Function Methode
         public void CreateCopy()
         {
@@ -547,5 +564,7 @@ namespace Vapeur.Business.Controller
         }
 
         #endregion
+=======
+>>>>>>> 2e7684875e1c639324fd7c68fca1e1f4a90a2473
     }
 }
