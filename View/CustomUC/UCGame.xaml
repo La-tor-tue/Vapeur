@@ -11,13 +11,16 @@
             <ColumnDefinition Width="160"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <StackPanel HorizontalAlignment="Center" Margin="0,106,0,0" Orientation="Vertical" VerticalAlignment="Top">
-            <Button x:Name="btnLoan" Content="Louer" Margin="0,10,0,0"/>
-            <Button x:Name="btnBook" Content="Reserver" Margin="0,10,0,0"/>
+        <StackPanel HorizontalAlignment="Center" Margin="0,154,0,0" Orientation="Vertical" VerticalAlignment="Top">
+            <Button x:Name="btnLoan" Content="Louer" Margin="0,10,0,0" Click="btnLoan_Click"/>
         </StackPanel>
-        <Label Content="Balance: " HorizontalAlignment="Center" Margin="0,66,0,0" VerticalAlignment="Top"/>
+        <Label Content="Vos crédits: " HorizontalAlignment="Center" Margin="0,66,0,0" VerticalAlignment="Top"/>
+        <TextBox IsReadOnly="True" DataContext="{Binding PlayerLogged}" HorizontalAlignment="Center" Margin="0,97,0,0" TextWrapping="Wrap" Text="{Binding Credit}" VerticalAlignment="Top" Width="120"/>
         <Label Content="Catalogue" HorizontalAlignment="Center" Margin="0,23,0,0" VerticalAlignment="Top"/>
-        <ListBox Grid.Column="1" d:ItemsSource="{Binding AllGames}"/>
+        <ListBox SelectedItem="{Binding SelectedGame}" Grid.Column="1" ItemsSource="{Binding AllGames}">
+
+        </ListBox>
+        
 
     </Grid>
 </UserControl>

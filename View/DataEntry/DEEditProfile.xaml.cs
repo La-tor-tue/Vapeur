@@ -10,30 +10,32 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Vapeur.Business.Controller;
-using Vapeur.View.DataEntry;
 
-namespace Vapeur.View.CustomUC
+namespace Vapeur.View.DataEntry
 {
     /// <summary>
-    /// Logique d'interaction pour UCProfile.xaml
+    /// Logique d'interaction pour DEEditProfile.xaml
     /// </summary>
-    public partial class UCProfile : UserControl
+    public partial class DEEditProfile : Window
     {
-        public UCProfile()
+        public DEEditProfile()
         {
             InitializeComponent();
 
         }
 
-        private void btnEditProfile_Click(object sender, RoutedEventArgs e)
+        private void btnSaveCreate_Click(object sender, RoutedEventArgs e)
         {
-            DEEditProfile dEEditProfile= new DEEditProfile();
+            MainController mainController = this.DataContext as MainController;
+            mainController.EditProfile();
+            this.Close();
+        }
 
-            dEEditProfile.DataContext= this.DataContext as MainController;
-            dEEditProfile.ShowDialog();
+        private void btnCancelCreate_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

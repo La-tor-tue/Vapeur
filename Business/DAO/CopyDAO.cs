@@ -80,12 +80,14 @@ namespace Vapeur.Business.DAO
                                 ID = reader.GetInt32(0),
                                 Game = new VideoGame(),
                                 Owner = new Player(),
-                                Loan = new Loan()
+                                Loan = new Loan
+                                {
+                                    Ongoing = false
+                                },
                             };
 
                             copy.Game.ID = reader.GetInt32(1);
                             copy.Owner.ID = reader.GetInt32(2);
-
                             copies.Add(copy);
                         }
                     }
@@ -107,7 +109,8 @@ namespace Vapeur.Business.DAO
             {
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    SqlCommand cmd = new SqlCommand("SELECT * FROM dbo.copy", connection);
+                    SqlCommand cmd = new SqlCommand("SELECT * FROM dbo.copy where idCopy=@id", connection);
+                    cmd.Parameters.AddWithValue("id", id);
                     connection.Open();
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
