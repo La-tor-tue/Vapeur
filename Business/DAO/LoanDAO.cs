@@ -192,6 +192,11 @@ namespace Vapeur.Business.DAO
             return loan;
         }
 
+        public override Loan Read(string chain)
+        {
+            throw new NotImplementedException();
+        }
+
         public override bool Update(Loan obj)
         {
             bool success = false;

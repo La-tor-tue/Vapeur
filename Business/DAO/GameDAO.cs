@@ -168,6 +168,11 @@ namespace Vapeur.Business.DAO
             throw new NotImplementedException();
         }
 
+        public override VideoGame Read(string chain)
+        {
+            throw new NotImplementedException();
+        }
+
         public override bool Update(VideoGame obj)
         {
             bool success = false;

@@ -5,18 +5,43 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Vapeur.View"
         mc:Ignorable="d"
-        Title="login" Height="450" Width="800">
+        Title="Connexion" Height="350" Width="400"
+        ResizeMode="NoResize"
+        >
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="123*"/>
+            <RowDefinition Height="151*"/>
+            <RowDefinition Height="60*"/>
+        </Grid.RowDefinitions>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="White"/>
+                <GradientStop Color="#FF4E626B" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Label Grid.Column="1" Content="Username" HorizontalAlignment="Left" Margin="263,146,0,0" VerticalAlignment="Top"/>
-        <Label Grid.Column="1" Content="Password" HorizontalAlignment="Left" Margin="263,191,0,0" VerticalAlignment="Top"/>
-        <PasswordBox Grid.Column="1" HorizontalAlignment="Left" Margin="366,199,0,0" VerticalAlignment="Top" Width="120"/>
-        <TextBox Grid.Column="1" HorizontalAlignment="Left" Margin="366,154,0,0" TextWrapping="Wrap" Text="Username" VerticalAlignment="Top" Width="120"/>
-        <Button Grid.Column="1" Content="Connexion" HorizontalAlignment="Left" Margin="425,239,0,0" VerticalAlignment="Top" Click="Button_Click"/>
+        <Button x:Name="btnLogInConnexion" Grid.Column="1" Content="Connexion" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Center" Margin="270,0,0,0" Click="btnLogInConnexion_Click"/>
+        <Button x:Name="btnSignIn" Grid.Column="1" Content="S'inscrire" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Center" Margin="75,0,0,0" Click="btnSignIn_Click"/>
 
-
+        <Grid DataContext="{Binding PlayerLogged}" Grid.ColumnSpan="2" Margin="0,123,0,0" Grid.RowSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50.011"/>
+                <RowDefinition Height="50.011"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="200"/>
+            </Grid.ColumnDefinitions>
+            <Label Content="Username" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Label Content="Mot de passe" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Center"/>
+            <TextBox Grid.Column="1" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding Username}" VerticalAlignment="Center" Width="120"/>
+            <PasswordBox x:Name="fieldPass" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Center" Width="120"/>
+        </Grid>
+        <Label Grid.Column="1" Content="Bienvenue sur Vapeur !" HorizontalAlignment="Center" VerticalAlignment="Center"/>
     </Grid>
 </Window>

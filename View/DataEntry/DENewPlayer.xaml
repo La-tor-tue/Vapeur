@@ -1,0 +1,42 @@
+﻿<Window x:Class="Vapeur.View.DataEntry.DENewPlayer"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Vapeur.View.DataEntry"
+        mc:Ignorable="d"
+        Title="S'inscrire" Height="400" Width="400"
+        ResizeMode="NoResize">
+    <Grid DataContext="{Binding NewPlayer}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="263*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="White"/>
+                <GradientStop Color="#FF4E626B" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="200"/>
+        </Grid.ColumnDefinitions>
+        <Label Content="Username" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Center"/>
+        <TextBox Grid.Column="1" HorizontalAlignment="Center" Grid.Row="1" TextWrapping="Wrap" Text="{Binding Username}" VerticalAlignment="Center" Width="120"/>
+        <Label Content="Mot de passe" HorizontalAlignment="Center" Grid.Row="2" VerticalAlignment="Center"/>
+        <PasswordBox x:Name="fieldNewPassword" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="2" VerticalAlignment="Center" Width="120"/>
+        <Label Content="Pseudo" HorizontalAlignment="Center" Grid.Row="3" VerticalAlignment="Center"/>
+        <TextBox Grid.Column="1" HorizontalAlignment="Center" Grid.Row="3" TextWrapping="Wrap" Text="{Binding Pseudo}" VerticalAlignment="Center" Width="120"/>
+        <Label Content="Date de naissance" HorizontalAlignment="Center" Grid.Row="4" VerticalAlignment="Center"/>
+        <DatePicker SelectedDate="{Binding BirthDate}" Grid.Column="1" HorizontalAlignment="Center" Margin="0,10,0,0" Grid.Row="4" VerticalAlignment="Top"/>
+        <Button x:Name="btnCancel" Content="Annuler" HorizontalAlignment="Center" Grid.Row="6" VerticalAlignment="Center" Click="btnCancel_Click"/>
+        <Button x:Name="btnSave" Grid.Column="1" Content="Enregistrer" HorizontalAlignment="Center" Grid.Row="6" VerticalAlignment="Center" Click="btnSave_Click"/>
+
+    </Grid>
+</Window>

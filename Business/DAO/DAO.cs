@@ -20,6 +20,7 @@ namespace Vapeur.Business.DAO
         public abstract bool Update(T obj);
         public abstract T Read(int id);
         public abstract T Read(int id1,int id2);
+        public abstract T Read(string chain);
         public abstract List<T> GetAll();
 
     }
