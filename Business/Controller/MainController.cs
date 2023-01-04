@@ -546,6 +546,16 @@ namespace Vapeur.Business.Controller
 
         }
 
+        public void CancelLoan()
+        {
+            loanDAO.Delete(SelectedLoan);
+            InitAllLoans();
+            InitMyLoans();
+            InitAllCopies();
+            InitMyCopies();
+            InitAllGames();
+        }
+
         #endregion
     }
 }

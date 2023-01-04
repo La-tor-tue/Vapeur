@@ -161,6 +161,11 @@ namespace Vapeur.Business.DAO
             throw new NotImplementedException();
         }
 
+        public override Copy Read(string chain)
+        {
+            throw new NotImplementedException();
+        }
+
         //INUTILE
         public override bool Update(Copy obj)
         {

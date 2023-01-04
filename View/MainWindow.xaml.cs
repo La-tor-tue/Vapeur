@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using Vapeur.Business.Controller;
 using Vapeur.Business.DAO;
 using Vapeur.Business.Metier;
+using Vapeur.View;
 using Vapeur.View.CustomUC;
 using Vapeur.View.DataEntry;
 
@@ -32,19 +33,11 @@ namespace Vapeur
         private MainController mainController;
         private readonly DAOFactory adf = DAOFactory.GetFactory(DAOFactoryType.MS_SQL_FACTORY);
 
-        public MainWindow()
+        public MainWindow(Player player)
         {
             InitializeComponent();
 
-            mainController = new MainController(adf,new Player {
-                ID=4,
-                Username= "username",
-                Password= "username",
-                Credit=10,
-                Pseudo="Pseudo",
-                Registration=new DateTime(2022,12,28),
-                BirthDate=new DateTime(2022, 12, 28)
-            });;
+            mainController = new MainController(adf,player);
 
 
             while(mainController.HasNewLoan())
@@ -62,6 +55,7 @@ namespace Vapeur
 
                         break;
                     case MessageBoxResult.No:
+                        mainController.CancelLoan();
                         break;
                     default:
                         break;
@@ -121,6 +115,14 @@ namespace Vapeur
 
             grContent.Children.Clear();
             grContent.Children.Add(uCProfile);
+        }
+
+        private void btnLogOut_Click(object sender, RoutedEventArgs e)
+        {
+            login login =new login();
+
+            login.Show();
+            this.Close();
         }
     }
 }

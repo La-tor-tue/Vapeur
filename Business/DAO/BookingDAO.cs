@@ -160,6 +160,12 @@ namespace Vapeur.Business.DAO
             }
             return booking;
         }
+
+        public override Booking Read(string chain)
+        {
+            throw new NotImplementedException();
+        }
+
         //INUTILE POUR BOOKING
         public override bool Update(Booking obj)
         {
