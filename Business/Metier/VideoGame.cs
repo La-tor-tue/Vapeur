@@ -25,15 +25,11 @@ namespace Vapeur.Business.Metier
 
         public Copy CopyAvaible()
         {
-
-            if (Copies.Count!=0)
+            foreach (Copy copy in Copies)
             {
-                for (int i = 0; i < Copies.Count; i++)
+                if (copy.IsAvaible())
                 {
-                    if (Copies[i].IsAvaible())
-                    {
-                        return Copies[i];
-                    }
+                    return copy;
                 }
             }
             return null;

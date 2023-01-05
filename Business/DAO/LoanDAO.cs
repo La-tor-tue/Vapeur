@@ -51,7 +51,7 @@ namespace Vapeur.Business.DAO
             catch (SqlException e)
             {
 
-                throw new Exception("Une erreur sql s'est produite! " + e.ErrorCode);
+                throw new Exception("Une erreur sql s'est produite! " + e.ErrorCode + " "+ e.Message);
             }
 
 

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Vapeur.View"
         mc:Ignorable="d"
         Title="Connexion" Height="350" Width="400"
-        ResizeMode="NoResize"
+        ResizeMode="NoResize" Icon="/Ressources/Vapeur.png"
         >
     <Grid>
         <Grid.RowDefinitions>

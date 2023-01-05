@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Vapeur.View.DataEntry"
         mc:Ignorable="d"
         Title="Selection de date" Height="400" Width="400"
-        ResizeMode="NoResize">
+        ResizeMode="NoResize" Icon="/Ressources/Vapeur.png">
     <Grid Background="#FF4E626B">
         <Grid.RowDefinitions>
             <RowDefinition/>
