@@ -260,6 +260,8 @@ namespace Vapeur.Business.Controller
 
 
         #region Function Methode
+
+        #region Put in Loan Function
         public void CreateCopy()
         {
             Copy newCopy = new Copy
@@ -268,16 +270,20 @@ namespace Vapeur.Business.Controller
                 Game = SelectedGame
             };
 
-
-            
-
-
             copyDAO.Create(newCopy);
             MyCopies.Add(newCopy);
             AllCopies.Add(newCopy);
 
             InitAll();
-
+            foreach (VideoGame game in AllGames)
+            {
+                if (SelectedGame.ID==game.ID)
+                {
+                    SelectedGame = game;
+                    break;
+                }
+            }
+            newCopy = SelectedGame.CopyAvaible();
 
             List<Booking> bookings = new List<Booking>();
 
@@ -309,6 +315,9 @@ namespace Vapeur.Business.Controller
             SelectedGame = null;
         }
 
+        #endregion
+
+        #region Edit Player Profile Function
         public void EditProfile()
         {
             if (SelectedPlayer.Pseudo!=PlayerLogged.Pseudo)
@@ -321,6 +330,9 @@ namespace Vapeur.Business.Controller
                 SelectedPlayer = PlayerLogged;
             }
         }
+        #endregion
+
+        #region Cancel a Booking Function
 
         public void CancelBooking()
         {
@@ -334,6 +346,10 @@ namespace Vapeur.Business.Controller
 
         }
 
+        #endregion
+
+        #region Create a Loan Function
+
         public bool CanBorrow()
         {
             if (PlayerLogged.LoanAllowed())
@@ -345,12 +361,15 @@ namespace Vapeur.Business.Controller
 
         public bool IsPossible()
         {
-            if (SelectedGame.CopyAvaible!=null)
+            Copy copy = SelectedGame.CopyAvaible();
+
+            if (copy == null ||  SelectedGame.Copies.Count == 0)
             {
-                return true;
+
+                return false;
             }
 
-            return false;
+            return true;
         }
 
         public bool CreateLoan()
@@ -422,6 +441,9 @@ namespace Vapeur.Business.Controller
             return true;
         }
 
+        #endregion
+
+        #region Finish a Loan Function
         public void EndLoan()
         {
             PriceCost = GetPrice();
@@ -472,7 +494,7 @@ namespace Vapeur.Business.Controller
             SelectedBooking = null;
         }
 
-
+        #region Price Calculation
 
         public int GetPrice() {
             int price = 0;
@@ -514,6 +536,11 @@ namespace Vapeur.Business.Controller
             return price;
         }
 
+        #endregion
+
+        #endregion
+
+        #region Loan on Connection Function
         public bool HasNewLoan()
         {
             foreach (Loan loan in MyLoans)
@@ -565,6 +592,8 @@ namespace Vapeur.Business.Controller
             InitMyCopies();
             InitAllGames();
         }
+
+        #endregion
 
         #endregion
 

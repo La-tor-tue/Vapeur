@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Vapeur.View.DataEntry"
         mc:Ignorable="d"
         Title="S'inscrire" Height="400" Width="400"
-        ResizeMode="NoResize">
+        ResizeMode="NoResize" Icon="/Ressources/Vapeur.png">
     <Grid DataContext="{Binding NewPlayer}">
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>

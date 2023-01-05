@@ -10,26 +10,46 @@ namespace Vapeur.Business.Controller
 {
     public class LogInController
     {
+        #region DATA
+
+        #region DAO
         private DAO<Player> playerDAO;
+
+        #endregion
+
+        #region DTO
+
         private Player playerLogged;
         private Player newPlayer;
         private string password;
+
+        #endregion
+
+        #endregion
+
+        #region Constructor
         public LogInController(DAOFactory dAOFactory)
         {
             playerDAO = dAOFactory.GetPlayerDAO();
             this.playerLogged = new Player();
             this.newPlayer = new Player();
             this.password = "";
-            PlayerLogged.Username = "Username";
+            PlayerLogged.Username = "";
             newPlayer.BirthDate= DateTime.Today;
         }
+        #endregion
+
+        #region PROP
 
         public Player PlayerLogged { get { return playerLogged; } set { playerLogged = value; } }
         public string Password { get { return password; } set { password= value; } }
         public Player NewPlayer { get { return newPlayer; } set { newPlayer= value; } }
 
+        #endregion
 
+        #region Function
 
+        #region Connection Function
         public bool Exist()
         {
             
@@ -56,6 +76,10 @@ namespace Vapeur.Business.Controller
             PlayerLogged.Password = "";
         }
 
+        #endregion
+
+        #region Sign In Function
+
         public bool CreatePlayer()
         {
             NewPlayer.Registration = DateTime.Today;
@@ -76,5 +100,8 @@ namespace Vapeur.Business.Controller
 
             return false;
         }
+        #endregion
+
+        #endregion
     }
 }

@@ -27,12 +27,12 @@ namespace Vapeur.Business.Metier
 
         public bool IsAvaible()
         {
-            if (Loan.Ongoing)
+            if (Loan==null)
             {
-                return false;
+                return true;
             }
 
-            return true;
+            return false;
         }
 
         public void Borrow(Player borrower,Loan newLoan) { 

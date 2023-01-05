@@ -89,26 +89,7 @@ namespace Vapeur.Business.DAO
                     }
                 }
             }
-            /*
-            if(games.Count > 0)
-            {
-                CopyDAO copyDAO = new CopyDAO();
-                List<Copy> copyList = new List<Copy>();
-                copyList= copyDAO.GetAll();
-
-                for (int i = 0; i < games.Count; i++)
-                {
-                    foreach (Copy copy in copyList)
-                    {
-                        if (copy.Game.ID == games[i].ID)
-                        {
-                            games[i].Copies.Add(copy);
-                        }
-                    }
-                    
-                }
-            }
-            */
+            
             return games;
         }
 
@@ -138,22 +119,7 @@ namespace Vapeur.Business.DAO
                         }
                     }
                 }
-                /*
-                if (game != null)
-                {
-                    CopyDAO copyDAO = new CopyDAO();
-                    List<Copy> copyList = new List<Copy>();
-                    copyList = copyDAO.GetAll();
-
-                        foreach (Copy copy in copyList)
-                        {
-                            if (copy.Game.ID == game.ID)
-                            {
-                                game.Copies.Add(copy);
-                            }
-                        }
-                }
-                */
+                
             }
             catch (SqlException e)
             {
