@@ -6,14 +6,15 @@
         xmlns:local="clr-namespace:Vapeur"
         mc:Ignorable="d"
         Title="Vapeur" Height="500" Width="850"
-        ResizeMode="NoResize"
+        ResizeMode="NoResize" Icon="/Ressources/Vapeur.png"
         >
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="79.007"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Width="707" Height="20" Margin="133,0,0,0">
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Width="750" Height="59">
+            <Image x:Name="Logo" Height="51" Width="54" Source="/Ressources/Vapeur.png" Margin="10,0,0,0"/>
             <Button x:Name="btnGame" Content="CATALOGUE" Margin="20,0,0,0" Click="btnGame_Click"/>
             <Button x:Name="btnBooking" Content="MES RESERVATIONS" Margin="20,0,0,0" Click="btnBooking_Click"/>
             <Button x:Name="btnLoan" Content="MES LOCATIONS" Margin="20,0,0,0" Click="btnLoan_Click"/>
@@ -29,6 +30,7 @@
                 </LinearGradientBrush>
             </Grid.Background>
         </Grid>
+
     </Grid>
 </Window>
     

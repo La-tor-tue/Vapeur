@@ -161,6 +161,7 @@ namespace Vapeur.Business.DAO
             return booking;
         }
 
+        // Inutile
         public override Booking Read(string chain)
         {
             throw new NotImplementedException();
