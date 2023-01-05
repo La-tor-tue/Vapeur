@@ -275,6 +275,15 @@ namespace Vapeur.Business.Controller
             AllCopies.Add(newCopy);
 
             InitAll();
+            foreach (VideoGame game in AllGames)
+            {
+                if (SelectedGame.ID==game.ID)
+                {
+                    SelectedGame = game;
+                    break;
+                }
+            }
+            newCopy = SelectedGame.CopyAvaible();
 
             List<Booking> bookings = new List<Booking>();
 
@@ -321,7 +330,6 @@ namespace Vapeur.Business.Controller
                 SelectedPlayer = PlayerLogged;
             }
         }
-        #endregion
 
         #region Cancel a Booking Function
 
@@ -485,7 +493,7 @@ namespace Vapeur.Business.Controller
             SelectedBooking = null;
         }
 
-        #region Price Calculation
+
 
         public int GetPrice() {
             int price = 0;
