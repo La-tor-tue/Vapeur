@@ -330,7 +330,6 @@ namespace Vapeur.Business.Controller
                 SelectedPlayer = PlayerLogged;
             }
         }
-        #endregion
 
         #region Cancel a Booking Function
 
@@ -494,7 +493,7 @@ namespace Vapeur.Business.Controller
             SelectedBooking = null;
         }
 
-        #region Price Calculation
+
 
         public int GetPrice() {
             int price = 0;
